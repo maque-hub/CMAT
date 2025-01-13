@@ -1,0 +1,13 @@
+detlib/weights/
+data/
+results/
+runs/
+exps/
+!detlib/mmocr/tools/data
+.idea
+*.weights
+*.png
+*.avi
+*.pth
+*.log
+!crop_adv.pth

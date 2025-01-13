@@ -1,0 +1,40 @@
+DATA: 
+  CLASS_NAME_FILE: 'configs/namefiles/coco.names'
+  AUGMENT: '3'
+
+  TRAIN:
+    IMG_DIR: 'data/training_data' #training image path
+    LAB_DIR: 'data/FUNSD/training_data/annotations'
+
+  TEST:
+    IMG_DIR: 'data/FUNSD/testing_data/images'
+    LAB_DIR: 'data/FUNSD/testing_data/annotations'
+
+
+DETECTOR: #target 
+  NAME: ["PS_IC15", "DB_r50","DBPP_r50"] 
+  WEIGHT: [1.0, 1.0, 1.0]
+  #WEIGHT: [1.0, 5.323763816507897, 2.1384558526619317]#optimized weight
+  
+
+ATTACKER:
+  METHOD: "optim"
+  EPSILON: 0.09 #patch epsilon
+  MAX_EPOCH: 1000
+  ITER_STEP: 1
+
+  STEP_SIZE: 0.005
+  TARGET_CLASS:
+  ATTACK_CLASS: '0' 
+  LOSS_FUNC: "obj-tv" # [null, 'descend-mse', 'ascend-mse', 'obj', 'obj-tv']
+  tv_eta: 0 
+  obj_eta: 1 
+  scheduler: 'ALRS'
+  START_LEARNING_RATE: 0.09
+
+  PATCH_ATTACK:
+    WIDTH: 200
+    HEIGHT: 200
+    EPSILON: 0.09 
+    INIT: "random" # ['random', 'zero']
+    ASPECT_RATIO: 1 
